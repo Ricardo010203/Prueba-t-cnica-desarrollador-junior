@@ -1,0 +1,91 @@
+//// Punto #1 función en javascript que retorne la división de 2 enteros.
+
+    function divisionDeEnteros(numero1, numero2) {
+        return numero1 / numero2;
+    }
+
+    let resultado = divisionDeEnteros(10, 2);
+    console.log(resultado);
+
+//// Punto #2 función en javascript que retorna la representación en base 
+
+    function convertirBase(x, k) {
+        let resultado = "";
+        while (x > 0) {
+            resultado = (x % k) + resultado;
+            x = Math.floor(x / k);
+        }
+        return resultado;
+    }
+
+    let numero = 42;
+    let base = 2;
+    let resultado = convertirBase(numero, base);
+    console.log(resultado);
+
+//// Punta #3 algoritmo árbol en javascript con funciones para calcular peso y altura.
+
+    class TreeNode {
+        constructor(value, weight) {
+            this.value = value;
+            this.weight = weight;
+            this.children = [];
+        }
+    }
+
+    function calcularPeso(arbol) {
+        if (!arbol) return 0;
+        let peso = arbol.weight;
+        for (let hijo of arbol.children) {
+            peso += calcularPeso(hijo);
+        }
+        return peso;
+    }
+
+    function calcularPesoPromedio(arbol) {
+        let pesoTotal = calcularPeso(arbol);
+        let cantidadNodos = contarNodos(arbol);
+        return pesoTotal / cantidadNodos;
+    }
+
+    function contarNodos(arbol) {
+        if (!arbol) return 0;
+        let cantidad = 1;
+        for (let hijo of arbol.children) {
+            cantidad += contarNodos(hijo);
+        }
+        return cantidad;
+    }
+
+    function calcularAltura(arbol) {
+        if (!arbol) return 0;
+        let alturaMaxima = 0;
+        for (let hijo of arbol.children) {
+            alturaMaxima = Math.max(alturaMaxima, calcularAltura(hijo));
+        }
+        return 1 + alturaMaxima;
+    }
+
+    let padre = new TreeNode("A", 10);
+    let hijo1 = new TreeNode("B", 20);
+    let hijo2 = new TreeNode("C", 30);
+    let nieto1 = new TreeNode("D", 40);
+
+    padre.children.push(hijo1, hijo2);
+    hijo1.children.push(nieto1);
+
+    console.log("Peso del árbol 1:", calcularPeso(padre));
+    console.log("Peso promedio del árbol 1:", calcularPesoPromedio(padre));
+    console.log("Altura del árbol 1:", calcularAltura(padre));
+    console.log("\n-------------------\n");
+
+    let padre2 = new TreeNode("A", 15);
+    let hijo3 = new TreeNode("B", 5);
+    let hijo4 = new TreeNode("C", 9);
+    let hijo5 = new TreeNode("D", 6);
+
+    padre2.children.push(hijo3, hijo4, hijo5);
+
+    console.log("Peso del árbol 2:", calcularPeso(padre2));
+    console.log("Peso promedio del árbol 2:", calcularPesoPromedio(padre2));
+    console.log("Altura del árbol 2:", calcularAltura(padre2));
