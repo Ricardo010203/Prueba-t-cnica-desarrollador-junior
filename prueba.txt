@@ -18,8 +18,8 @@
         return resultado;
     }
 
-    let numero = 42;
-    let base = 2;
+    let numero = 287;
+    let base = 4;
     let resultado = convertirBase(numero, base);
     console.log(resultado);
 
